@@ -4,18 +4,34 @@ import com.trendsoftware.usermanagementapp.domain.entity.Gender
 
 class UserValidator {
     fun validateName(name: String): ValidationResult {
-        TODO("Not yet implemented")
+        return if (name.isBlank()) {
+            ValidationResult.Error(ValidationError.EmptyName)
+        } else {
+            ValidationResult.Success
+        }
     }
 
     fun validateAge(age: Int): ValidationResult {
-        TODO("Not yet implemented")
+        return if (age < 0) {
+            ValidationResult.Error(ValidationError.InvalidAge)
+        } else {
+            ValidationResult.Success
+        }
     }
 
     fun validateJobTitle(jobTitle: String): ValidationResult {
-        TODO("Not yet implemented")
+        return if (jobTitle.isBlank()) {
+            ValidationResult.Error(ValidationError.EmptyJobTitle)
+        } else {
+            ValidationResult.Success
+        }
     }
 
     fun validateGender(gender: Gender): ValidationResult {
-        TODO("Not yet implemented")
+        return if (gender == Gender.UNKNOWN) {
+            ValidationResult.Error(ValidationError.EmptyGender)
+        } else {
+            ValidationResult.Success
+        }
     }
 }
