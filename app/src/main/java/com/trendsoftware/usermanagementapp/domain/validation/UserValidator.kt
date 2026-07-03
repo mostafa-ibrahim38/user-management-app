@@ -12,10 +12,10 @@ class UserValidator {
     }
 
     fun validateAge(age: Int): ValidationResult {
-        return if (age < 0) {
-            ValidationResult.Error(ValidationError.InvalidAge)
-        } else {
-            ValidationResult.Success
+        return when {
+            age <= 0 -> ValidationResult.Error(ValidationError.InvalidAge)
+            age > 120 -> ValidationResult.Error(ValidationError.InvalidAge)
+            else -> ValidationResult.Success
         }
     }
 
