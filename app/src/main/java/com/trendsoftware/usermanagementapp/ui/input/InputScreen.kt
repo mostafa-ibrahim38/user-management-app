@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.trendsoftware.usermanagementapp.R
 import com.trendsoftware.usermanagementapp.domain.entity.Gender
+import com.trendsoftware.usermanagementapp.domain.validation.ValidationError
 import com.trendsoftware.usermanagementapp.ui.components.GenderOptionCard
 import com.trendsoftware.usermanagementapp.ui.components.PrimaryActionButton
 import com.trendsoftware.usermanagementapp.ui.components.UserTextField
@@ -100,7 +101,7 @@ fun InputScreenContent(
                 label = stringResource(R.string.label_full_name),
                 icon = Icons.Filled.Person,
                 placeholder = stringResource(R.string.placeholder_full_name),
-                errorText = uiState.nameError
+                errorText = uiState.nameError?.toErrorString()
             )
 
             UserTextField(
@@ -109,7 +110,7 @@ fun InputScreenContent(
                 label = stringResource(R.string.label_age),
                 icon = Icons.Filled.Cake,
                 placeholder = stringResource(R.string.placeholder_age),
-                errorText = uiState.ageError,
+                errorText = uiState.ageError?.toErrorString(),
                 keyboardType = KeyboardType.Number
             )
 
@@ -119,7 +120,7 @@ fun InputScreenContent(
                 label = stringResource(R.string.label_job_title),
                 icon = Icons.Filled.Work,
                 placeholder = stringResource(R.string.placeholder_job_title),
-                errorText = uiState.jobTitleError
+                errorText = uiState.jobTitleError?.toErrorString()
             )
 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -146,12 +147,20 @@ fun InputScreenContent(
                         modifier = Modifier.weight(1f)
                     )
                 }
+                uiState.genderError?.let {
+                    Text(
+                        text = stringResource(R.string.error_gender_required),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(start = 4.dp, top = 2.dp)
+                    )
+                }
             }
         }
 
-        uiState.generalError?.let { error ->
+        if (uiState.databaseError) {
             Text(
-                text = error,
+                text = stringResource(R.string.error_database),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(horizontal = 8.dp)
@@ -164,6 +173,16 @@ fun InputScreenContent(
             onClick = { onAction(UserInputAction.SaveClicked) },
             isLoading = uiState.isLoading
         )
+    }
+}
+
+@Composable
+private fun ValidationError.toErrorString(): String {
+    return when (this) {
+        ValidationError.EmptyName -> stringResource(R.string.error_name_required)
+        ValidationError.InvalidAge -> stringResource(R.string.error_age_invalid)
+        ValidationError.EmptyJobTitle -> stringResource(R.string.error_job_title_required)
+        ValidationError.EmptyGender -> stringResource(R.string.error_gender_required)
     }
 }
 
