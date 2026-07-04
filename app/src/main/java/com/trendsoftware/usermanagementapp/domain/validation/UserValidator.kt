@@ -1,8 +1,9 @@
 package com.trendsoftware.usermanagementapp.domain.validation
 
 import com.trendsoftware.usermanagementapp.domain.entity.Gender
+import javax.inject.Inject
 
-class UserValidator {
+class UserValidator @Inject constructor() {
     fun validateName(name: String): ValidationResult {
         return if (name.isBlank()) {
             ValidationResult.Error(ValidationError.EmptyName)
