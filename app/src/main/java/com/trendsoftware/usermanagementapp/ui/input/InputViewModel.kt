@@ -32,21 +32,23 @@ class InputViewModel @Inject constructor(
         when (action) {
             is UserInputAction.NameChanged -> {
                 _uiState.update {
-                    it.copy(name = action.value, nameError = null, generalError = null)
+                    it.copy(name = action.value, nameError = null, databaseError = false)
                 }
             }
             is UserInputAction.AgeChanged -> {
                 _uiState.update {
-                    it.copy(age = action.value, ageError = null, generalError = null)
+                    it.copy(age = action.value, ageError = null, databaseError = false)
                 }
             }
             is UserInputAction.JobTitleChanged -> {
                 _uiState.update {
-                    it.copy(jobTitle = action.value, jobTitleError = null, generalError = null)
+                    it.copy(jobTitle = action.value, jobTitleError = null, databaseError = false)
                 }
             }
             is UserInputAction.GenderChanged -> {
-                _uiState.update { it.copy(gender = action.value) }
+                _uiState.update {
+                    it.copy(gender = action.value, genderError = null)
+                }
             }
             is UserInputAction.SaveClicked -> saveUser()
         }
@@ -63,7 +65,7 @@ class InputViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, generalError = null) }
+            _uiState.update { it.copy(isLoading = true, databaseError = false) }
 
             when (val result = addUserUseCase(user)) {
                 is AddUserResult.Success -> {
@@ -77,10 +79,7 @@ class InputViewModel @Inject constructor(
                 }
                 is AddUserResult.DatabaseError -> {
                     _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            generalError = "حدث خطأ أثناء الحفظ، يرجى المحاولة مرة أخرى"
-                        )
+                        it.copy(isLoading = false, databaseError = true)
                     }
                 }
             }
@@ -89,10 +88,10 @@ class InputViewModel @Inject constructor(
 
     private fun InputUiState.applyValidationError(error: ValidationError): InputUiState {
         return when (error) {
-            ValidationError.EmptyName -> copy(nameError = "الاسم مطلوب ولا يمكن أن يكون فارغًا")
-            ValidationError.InvalidAge -> copy(ageError = "يرجى إدخال عمر صحيح")
-            ValidationError.EmptyJobTitle -> copy(jobTitleError = "المسمى الوظيفي مطلوب")
-            ValidationError.EmptyGender -> copy(generalError = "يرجى اختيار النوع")
+            ValidationError.EmptyName -> copy(nameError = ValidationError.EmptyName)
+            ValidationError.InvalidAge -> copy(ageError = ValidationError.InvalidAge)
+            ValidationError.EmptyJobTitle -> copy(jobTitleError = ValidationError.EmptyJobTitle)
+            ValidationError.EmptyGender -> copy(genderError = ValidationError.EmptyGender)
         }
     }
-}
+}

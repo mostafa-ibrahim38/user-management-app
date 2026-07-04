@@ -19,10 +19,11 @@
     <string name="button_save">حفظ في قاعدة البيانات</string>
 
     <!-- Error Messages -->
-    <string name="error_name_required">الاسم مطلوب</string>
-    <string name="error_age_invalid">يرجى إدخال عمر صحيح</string>
+    <string name="error_name_required">الاسم مطلوب ولا يمكن أن يكون فارغًا</string>
+    <string name="error_age_invalid">يرجى إدخال عمر صحيح بين 1 و120</string>
     <string name="error_job_title_required">المسمى الوظيفي مطلوب</string>
-    <string name="error_general">حدث خطأ أثناء الحفظ</string>
+    <string name="error_gender_required">يرجى اختيار النوع</string>
+    <string name="error_database">حدث خطأ أثناء الحفظ، يرجى المحاولة مرة أخرى</string>
 
     <string name="title_users">المستخدمون</string>
     <string name="users_count">%1$d عضو في الدليل</string>
