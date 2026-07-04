@@ -1,33 +1,3 @@
 <resources>
     <string name="app_name">User Management App</string>
-    <string name="title_registration">التسجيل</string>
-    <string name="subtitle_add_new_member">أكمل البيانات لإضافة عضو جديد إلى الدليل</string>
-
-    <string name="label_full_name">الاسم الكامل</string>
-    <string name="placeholder_full_name">مثال: أحمد علي</string>
-
-    <string name="label_age">العمر</string>
-    <string name="placeholder_age">25</string>
-
-    <string name="label_job_title">المسمى الوظيفي</string>
-    <string name="placeholder_job_title">مهندس برمجيات</string>
-
-    <string name="label_gender">الجنس</string>
-    <string name="gender_male">ذكر</string>
-    <string name="gender_female">أنثى</string>
-
-    <string name="button_save">حفظ في قاعدة البيانات</string>
-
-    <!-- Error Messages -->
-    <string name="error_name_required">الاسم مطلوب ولا يمكن أن يكون فارغًا</string>
-    <string name="error_age_invalid">يرجى إدخال عمر صحيح بين 1 و120</string>
-    <string name="error_job_title_required">المسمى الوظيفي مطلوب</string>
-    <string name="error_gender_required">يرجى اختيار النوع</string>
-    <string name="error_database">حدث خطأ أثناء الحفظ، يرجى المحاولة مرة أخرى</string>
-
-    <string name="title_users">المستخدمون</string>
-    <string name="users_count">%1$d عضو في الدليل</string>
-    <string name="empty_state_title">لا يوجد مستخدمين بعد</string>
-    <string name="empty_state_subtitle">أي بيانات تحفظها هتظهر هنا تلقائيًا</string>
-    <string name="fab_add_user">إضافة مستخدم جديد</string>
 </resources>
