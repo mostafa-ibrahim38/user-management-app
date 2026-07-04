@@ -72,4 +72,6 @@ dependencies {
     testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.lifecycle.runtime.testing)
+    implementation(libs.androidx.hilt.navigation.compose)
+
 }
