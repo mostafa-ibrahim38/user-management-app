@@ -3,6 +3,9 @@ package com.trendsoftware.usermanagementapp.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 
 private val AppColorScheme = lightColorScheme(
     primary = Primary,
@@ -45,9 +48,13 @@ private val AppColorScheme = lightColorScheme(
 fun UserManagementAppTheme(
     content: @Composable () -> Unit
 ) {
-    MaterialTheme(
-        colorScheme = AppColorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalLayoutDirection provides LayoutDirection.Rtl
+    ) {
+        MaterialTheme(
+            colorScheme = AppColorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
