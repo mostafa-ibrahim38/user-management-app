@@ -23,4 +23,10 @@
     <string name="error_age_invalid">يرجى إدخال عمر صحيح</string>
     <string name="error_job_title_required">المسمى الوظيفي مطلوب</string>
     <string name="error_general">حدث خطأ أثناء الحفظ</string>
+
+    <string name="title_users">المستخدمون</string>
+    <string name="users_count">%1$d عضو في الدليل</string>
+    <string name="empty_state_title">لا يوجد مستخدمين بعد</string>
+    <string name="empty_state_subtitle">أي بيانات تحفظها هتظهر هنا تلقائيًا</string>
+    <string name="fab_add_user">إضافة مستخدم جديد</string>
 </resources>
