@@ -46,9 +46,6 @@ fun InputScreen(
         viewModel.events.collect { event ->
             when (event) {
                 is UserInputEvent.UserSaved -> onUserSaved()
-                is UserInputEvent.ShowValidationError -> {
-                    // Handle validation errors if needed
-                }
             }
         }
     }
