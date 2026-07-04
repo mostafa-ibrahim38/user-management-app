@@ -77,9 +77,23 @@ class UserValidatorTest {
     }
 
     @Test
-    fun `should return true when age is zero`() {
+    fun `should return error when age is zero`() {
         // Given
         val age = 0
+
+        // When
+        val result = userValidation.validateAge(age)
+
+        // Then
+        assertThat(result).isEqualTo(
+            ValidationResult.Error(ValidationError.InvalidAge)
+        )
+    }
+
+    @Test
+    fun `should return success when age is one (minimum valid age)`() {
+        // Given
+        val age = 1
 
         // When
         val result = userValidation.validateAge(age)
